@@ -27,6 +27,7 @@ To use the reference client (`OpcUaRingBuffer.ps1`), you'll need:
 | Controller | NX102-9000 Ver. 1.64 HW Rev. A |
 | Sysmac Studio | Ver. 1.63 |
 | PowerShell | 7.5.2 |
+| Pester     | 5.7.1 |
 
 ## Library Structure
 `RingBufferOpcUaExtensionLib` consists of the following:

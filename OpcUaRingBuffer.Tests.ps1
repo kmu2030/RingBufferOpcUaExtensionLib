@@ -26,6 +26,7 @@ The information model test runs on `RingBufferOpcUaExtensionLib.smc2` by default
 Controllers: OMRON Co., Ltd. NX1 (Ver. 1.64 or later), NX5 (Ver. 1.64 or later), NX7 (Ver. 1.35 or later), NJ5 (Ver. 1.63 or later)
 IDE:Sysmac Studio Ver.1.62 or later
 PowerShell: PowerShell 7.5 or later
+Pester     : 5.7.1
 
 ## Usage Steps (Simulator)
 1.  Run `./PwshOpcUaClient/setup.ps1`.

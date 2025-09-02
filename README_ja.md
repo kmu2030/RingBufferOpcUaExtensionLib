@@ -1,8 +1,9 @@
 # RingBufferOpcUaExtensionLib
-これは、[`RingBuffer`](https://github.com/kmu2030/RingBufferLib)をコントローラまたは、シミュレータのOPC UAサーバで公開し、OPC UAクライアントを介して操作するためのライブラリです。
-`RingBufferOpcUaExtensionLib`は、[`PseudoUAMethodExample`](https://github.com/kmu2030/PseudoUAMethodExample)で示す疑似UA Methodとして`RingBuffer`への操作を公開します。
-また、[`PwshOpcUaClient`](https://github.com/kmu2030/PwshOpcUaClient)を使用したリファレンスクライアントとテストを含みます。
-テストは、リファレンスクライアントのテストであると同時に、`PwshOpcUaClient`を使用したサーバ側情報モデルテストのモックです。
+**RingBufferOpcUaExtensionLib**は、[RingBuffer](https://github.com/kmu2030/RingBufferLib)をコントローラまたは、シミュレータのOPC UAサーバで公開し、OPC UAクライアントを介して操作するためのライブラリです。
+**RingBufferOpcUaExtensionLib**は、[PseudoUAMethodExample](https://github.com/kmu2030/PseudoUAMethodExample)で示す疑似UA Methodとして**RingBuffer**への操作を公開します。
+また、[PwshOpcUaClient](https://github.com/kmu2030/PwshOpcUaClient)を使用したリファレンスクライアントとテストを含みます。
+テストは、リファレンスクライアントのテストであると同時に、PwshOpcUaClientを使用したサーバ側モデルテストのモックです。
+["OPC UAでRingBufferを公開する"](https://zenn.dev/kitam/articles/2fc26dfbefc2eb)に幾らか追加の情報があります。
 
 ## 使用環境
 ライブラリ(`RingBufferOpcUaExtensionLib`)の使用には、以下が必要です。
@@ -19,7 +20,7 @@
 | PowerShell    | 7以降 |
 
 ## 構築環境
-`RingBufferOpcUaExtensionLib`は、以下の環境で構築しています。
+RingBufferOpcUaExtensionLibは、以下の環境で構築しています。
 
 | Item            | Version              |
 | :-------------- | :------------------- |
@@ -29,26 +30,26 @@
 | Pester          | 5.7.1 |
 
 ## ライブラリの構成
-`RingBufferOpcUaExtensionLib`は、以下で構成します。
+RingBufferOpcUaExtensionLibは、以下で構成します。
 
 * **RingBufferOpcUaExtensionLib.slr**   
    Sysmacプロジェクト用ライブラリです。
    プロジェクトで参照して使用します。
 
 * **RingBufferOpcUaExtensionLib.smc2**   
-  `RingBufferOpcUaExtensionLib`開発用のSysmacプロジェクトです。   
+  RingBufferOpcUaExtensionLib開発用のSysmacプロジェクトです。   
   リファレンスクライアントのテストプログラムを含みます。
 
-* **`libs/`**   
-  `RingBufferOpcUaExtensionLib`の依存ライブラリです。
+* **libs/**   
+  RingBufferOpcUaExtensionLibの依存ライブラリです。
 
 ## ライブラリの使用手順
 ライブラリは、以下の手順で使用します。
 
-1. **`lib/RingBufferLib.slr`をプロジェクトで参照する**   
+1. **lib/RingBufferLib.slrをプロジェクトで参照する**   
    既に`RingBufferLib.slr`を参照している場合は不要です。
 
-2. **`RingBufferOpcUaExtensionLib.slr`をプロジェクトで参照する**
+2. **RingBufferOpcUaExtensionLib.slrをプロジェクトで参照する**
 
 3. **プロジェクトをビルドしてエラーが無いことを確認する**   
    ライブラリは名前空間を使用しています。
@@ -62,22 +63,22 @@
 
 * **OpcUaRingBuffer.Tests.ps1**   
   `Pester`と`RingBufferOpcUaExtensionLib.smc2`を使用するリファレンスクライアンのテストです。   
-  `RingBufferOpcUaExtensionLib`で公開する`RingBuffer`は情報モデルでもあり、そのテストも兼ねています。
+  RingBufferOpcUaExtensionLibで公開するRingBufferはモデルでもあり、そのテストも兼ねています。
 
 * **ModelTestController.ps1**   
   `RingBufferOpcUaExtensionLib.smc2`で動作するテストプログラムを操作します。
 
 * **PwshOpcUaClient/**   
-   `PwshOpcUaClient`です。
-   使用方法は、[`PwshOpcUaClient`](https://github.com/kmu2030/PwshOpcUaClient)を参照します。
+   PwshOpcUaClientです。
+   使用方法は、[PwshOpcUaClient](https://github.com/kmu2030/PwshOpcUaClient)を参照します。
 
 ## リファレンスクライアントの使用手順
 リファレンスクライアントは、テスト及び例示で使用しています。
 リファレンスクライアントの使用手順の概略は、以下です。
 
-1. **`PwshOpcUaClient`のセットアップ**
+1. **PwshOpcUaClientのセットアップ**
 
-2. **`PwshOpcUaClient`とリファレンスクライアントをPowerShellセッションにロード**
+2. **PwshOpcUaClientとリファレンスクライアントをPowerShellセッションにロード**
 
 3. **リファレンスクライアントを使用するコードの実行**
 
@@ -87,19 +88,19 @@
 サーバプロジェクト(`ExampleOpcUaRingBuffer.smc2`)は共通です。
 スクリプトには、以下があります。
 
-* **`ExampleOpcUaRingBufferRead.ps1`**   
-  サーバの`RingBuffer`からの読み出しとサーバの`RingBuffer`への書き込みを行います。
+* **ExampleOpcUaRingBufferRead.ps1**   
+  サーバのRingBufferからの読み出しとサーバのRingBufferへの書き込みを行います。
 
-* **`ExampleOpcUaRingBufferDiff.ps1`**   
-  クライアントが保持するサーバの`RingBuffer`のコンテクストを使用してサーバの`RingBuffer`の書き込み差分を取得します。   
-  また、サーバの`RingBuffer`への書き込みを行います。
+* **ExampleOpcUaRingBufferDiff.ps1**   
+  クライアントが保持するサーバのRingBufferのコンテクストを使用してサーバのRingBufferの書き込み差分を取得します。   
+  また、サーバのRingBufferへの書き込みを行います。
 
 スクリプトは、リポジトリのディレクトリ構造に合わせてパス構成をしています。
 パスを変更する場合、`PwshOpcUaClient.ps1`と`OpcUaRingBuffer.ps1`を読み込んでいる箇所を変更します。
 
 ## 例示の使用手順
 ### 共通事項
-例示は、コントローラ、シミュレータのOPC UAサーバと`PwshOpcUaClient`のOPC UAクライアントを使用します。
+例示は、コントローラ、シミュレータのOPC UAサーバとPwshOpcUaClientのOPC UAクライアントを使用します。
 そのため、サーバとのセッション確立時や、メッセージ交換に署名または、署名と暗号化を使用するとサーバ、クライアントそれぞれが証明書を拒否する可能性があります。
 いずれも拒否した証明書を信頼することで、次回の接続から拒否しなくなります。
 証明書に問題が無ければ、以下の操作を行います。
@@ -119,7 +120,7 @@
 Sysmac Studioのシミュレータ用OPC UAサーバでの手順を示します。
 手順は以下です。
 
-1. **`PwshOpcUaClient`のセットアップ**   
+1. **PwshOpcUaClientのセットアップ**   
    セットアップ済みの場合、不要です。
    以下をPowerShellで実行します。
 
@@ -127,7 +128,7 @@ Sysmac Studioのシミュレータ用OPC UAサーバでの手順を示します�
    ../PwshOpcUaClient/setup.ps1
    ```
 
-2. **Sysmac StuidoでSysmacプロジェクト(`ExampleOpcUaRingBuffer.smc2`)を開きシミュレータを起動**
+2. **Sysmac StuidoでSysmacプロジェクト(ExampleOpcUaRingBuffer.smc2)を開きシミュレータを起動**
 
 3. **シミュレータ用OPC UAサーバの起動と設定**   
    以下のように操作してOPC UAサーバを起動、設定します。
@@ -140,14 +141,15 @@ Sysmac Studioのシミュレータ用OPC UAサーバでの手順を示します�
    ./ExampleOpcUaRingBufferRead.ps1 -Interval 0.01
    ```
 
-   OPC UAサーバに接続すると以下のようにサーバ側の`RingBuffer`を操作します。
+   OPC UAサーバに接続すると以下のようにサーバ側のRingBufferを操作します。
+
    ![シミュレータ用OPC UAサーバを介したRingBuffer操作](./images/simulator-run-prg.gif)
 
 ### コントローラのOPC UAサーバでの使用手順
 コントローラのOPC UAサーバでの手順を示します。
 手順は以下です。
 
-1. **`PwshOpcUaClient`のセットアップ**   
+1. **PwshOpcUaClientのセットアップ**   
    セットアップ済みの場合、不要です。
    以下をPowerShellで実行します。
 
@@ -155,13 +157,13 @@ Sysmac Studioのシミュレータ用OPC UAサーバでの手順を示します�
    ../PwshOpcUaClient/setup.ps1
    ```
 
-2. **Sysmac StuidoでSysmacプロジェクト(`ExampleOpcUaRingBuffer.smc2`)を開き構成を使用環境に合わせる**
+2. **Sysmac StuidoでSysmacプロジェクト(ExampleOpcUaRingBuffer.smc2)を開き構成を使用環境に合わせる**
 
 3. **Sysmacプロジェクトをコントローラに転送**
 
 4. **コントローラのOPC UAサーバの設定**   
    Sysmac Studioでコントローラに接続し、以下のように操作してOPC UAサーバを設定します。
-   セキュリティ設定を行ったら、`PwshOpcUaClient`のクライアント証明書を信頼するために一度アクセスして拒否させた後、信頼リストに移動しています。
+   セキュリティ設定を行ったら、PwshOpcUaClientのクライアント証明書を信頼するために一度アクセスして拒否させた後、信頼リストに移動しています。
    ![コントローラのOPC UAサーバの設定](./images/controller-set-opc-ua-server.gif)
 
 5. **スクリプトの実行**   
@@ -171,9 +173,9 @@ Sysmac Studioのシミュレータ用OPC UAサーバでの手順を示します�
    ./ExampleOpcUaRingBufferRead.ps1 -UseSimulator $false -ServerUrl YOUR_SERVER_ENDPOINT -Interval 0.01
    ```
 
-   OPC UAサーバに接続すると以下のようにサーバ側の`RingBuffer`を操作します。
+   OPC UAサーバに接続すると以下のようにサーバ側のRingBufferを操作します。
    ![コントローラのOPC UAサーバを介したRingBuffer操作](./images/controller-run-prg.gif)
 
 ## ライセンスについて
-`PwshOpcUaClient`を使用するコードは、GPLv2ライセンスです。
+**PwshOpcUaClient**を使用するコードは、GPLv2ライセンスです。
 その他は、MITライセンスです。

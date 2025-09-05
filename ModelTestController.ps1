@@ -18,16 +18,16 @@ if not, write to the Free Software Foundation, Inc.,
 using namespace Opc.Ua
 using namespace Opc.Ua.Client
 
-class NXModelTestController {
+class ModelTestController {
     [hashtable] $Methods = $null
     [string] $BaseNodeId = ''
     [string] $NodeSeparator = '.'
 
-    NXModelTestController([string]$BaseNodeId) {
+    ModelTestController([string]$BaseNodeId) {
         $this.Init($BaseNodeId, '.')
     }
 
-    NXModelTestController([string]$BaseNodeId, [string]$NodeSeparator) {
+    ModelTestController([string]$BaseNodeId, [string]$NodeSeparator) {
         $this.Init($BaseNodeId, $NodeSeparator)
     }
 
@@ -301,7 +301,7 @@ class NXModelTestController {
             ) -contains $true `
             -or ($Results.Count -ne $Requests.Count)
         ) {
-            return [NXModelTestControllerMethodCallException]::new($ExceptionMessage, @{
+            return [ModelTestControllerMethodCallException]::new($ExceptionMessage, @{
                 Response = $Response
                 Results = $Results
                 DiagnosticInfos = $DiagnosticInfos
@@ -362,9 +362,9 @@ class NXModelTestController {
     }
 }
 
-class NXModelTestControllerMethodCallException : System.Exception {
+class ModelTestControllerMethodCallException : System.Exception {
     [hashtable]$CallInfo
-    NXModelTestControllerMethodCallException([string]$Message, [hashtable]$CallInfo) : base($Message) {
+    ModelTestControllerMethodCallException([string]$Message, [hashtable]$CallInfo) : base($Message) {
         $this.CallInfo = $CallInfo
     }
 }

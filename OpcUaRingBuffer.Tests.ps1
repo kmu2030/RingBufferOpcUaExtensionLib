@@ -52,13 +52,20 @@ Pester     : 5.7.1
     This step is unnecessary if a certificate has already been generated.
 6.  Register a user and password for the controller's OPC UA server.   
     This step is unnecessary if a user has already been registered.
-7.  Run `Invoke-Pester`.
+7.  Run Pester.
+    Replace YOUR_SERVER_ENDPOINT with your controller's OPC UA server endpoint and run the following in PowerShell.
+    ```powershell
+    Invoke-Pester -Container $(New-PesterContainer -Path . -Data @{ UseSimulator=$false; ServerUrl=YOUR_SERVER_ENDPOINT })
+    ```
 8.  Trust the client certificate on the controller's OPC UA server. Trust the rejected client certificate.   
     This step is unnecessary if you are using anonymous access without signing or encryption for message exchange.
 9.  Trust the server certificate in `PwshOpcUaClient`.
     Move the rejected server certificate from `PwshOpcUaClient/pki/rejected/certs` to `PwshOpcUaClient/pki/trusted/certs`.
-10.  Run `Invoke-Pester`.
-
+10.  Run Pester.
+    Replace YOUR_SERVER_ENDPOINT with your controller's OPC UA server endpoint and run the following in PowerShell.
+    ```powershell
+    Invoke-Pester -Container $(New-PesterContainer -Path . -Data @{ UseSimulator=$false; ServerUrl=YOUR_SERVER_ENDPOINT })
+    ```
 
 # このスクリプトについて
 このスクリプトは`Pester`による`OpcUaRingBuffer.ps1`のテストです。
@@ -96,13 +103,21 @@ Pester     : 5.7.1
     既に生成してある場合は不要。
 6.  コントローラのOPC UAサーバへユーザーとパスワードを登録
     既に登録してある場合は不要。
-7.  `Invoke-Pester`を実行
+7.  Pesterを実行
+    以下の`YOUR_SERVER_ENDPOINT`をコントローラのOPC UAサーバのエンドポイントに置き換え実行。
+    ```powershell
+    Invoke-Pester -Container $(New-PesterContainer -Path . -Data @{ UseSimulator=$false; ServerUrl=YOUR_SERVER_ENDPOINT })
+    ```
 8.  コントローラのOPC UAサーバでクライアント証明書の信頼
     拒否されたクライアント証明書を信頼する。
     Anonymousでメッセージ交換に署名も暗号化も使用しないのであれば不要。
 9.  `PwshOpcUaClient`でサーバ証明書を信頼
     `./PwshOpcUaClient/pki/rejected/certs`にある拒否したサーバ証明書を`./PwshOpcUaClient/pki/trusted/certs`に移動。
-10.  `Invoke-Pester`を実行
+10.  Pesterを実行
+    以下の`YOUR_SERVER_ENDPOINT`をコントローラのOPC UAサーバのエンドポイントに置き換え実行。
+    ```powershell
+    Invoke-Pester -Container $(New-PesterContainer -Path . -Data @{ UseSimulator=$false; ServerUrl=YOUR_SERVER_ENDPOINT })
+    ```
 #>
 
 using namespace Opc.Ua
@@ -113,11 +128,6 @@ param(
     [string]$UserName = 'taker',
     [string]$UserPassword = 'chocolatepancakes'
 )
-
-# $client = $null
-# $testController = $null
-# $target = $null
-# $bufferCapacity = 0
 
 BeforeAll {
     . "$PSScriptRoot/PwshOpcUaClient/PwshOpcUaClient.ps1"
@@ -134,10 +144,10 @@ BeforeAll {
         AccessUserIdentity = $AccessUserIdentity
     }
     $client = New-PwshOpcUaClient @clientParam
-    $testNode = "ns=$($UseSimulator ? '2;Programs.' : '4;')ModelTest.ModelTestOpcUaRingBuffer"
     $nodeSeparator = $UseSimulator ? '.' : '/'
+    $testNode = "ns=$($UseSimulator ? '2;Programs.' : '4;')ModelTest${nodeSeparator}ModelTestOpcUaRingBuffer"
 
-    $testController = [NXModelTestController]::new($testNode, $nodeSeparator)
+    $testController = [ModelTestController]::new($testNode, $nodeSeparator)
     $testController.Initialize($client.Session)
 
     $bufferCapacity = 65535
